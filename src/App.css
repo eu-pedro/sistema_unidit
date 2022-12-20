@@ -1,0 +1,40 @@
+.App{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title-aluno{
+    text-align: center;
+    font-size: 30px;
+    padding: 20px 0 20px 0;
+    color: #101010;
+}
+
+.title-curso{
+    text-align: center;
+    font-size: 30px;
+    padding: 30px 0 20px 0;
+    color: #101010;
+}
+.topo{
+    font-weight: 800;
+}
+
+table,td{
+    border: 1px solid black;
+    text-align: center;
+    padding: 15px 10px;
+    border-collapse: collapse;
+}
+
+thead{
+    background-color: #1565c08c;
+    color: #101010;
+}
+tr:hover:not(.topo){
+    background-color: #f5f7f7;
+    cursor: pointer;
+}
+table{
+    width: 100%;
+}
