@@ -13,6 +13,7 @@ import Home from './pages/home'
 import Aluno from './pages/aluno/index'
 import Curso from './pages/cursos'
 import Registro from './pages/registros'
+import Create from './pages/create.jsx';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
             <Route path='/alunos' element={<Aluno/>}/>
             <Route path='/cursos' element={<Curso/>}/>
             <Route path='/registro/:id' element={<Registro/>}/>
+            <Route path='/create' element={<Create/>}/>
           </Routes>
         </Router>
 

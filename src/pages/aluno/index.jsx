@@ -21,11 +21,6 @@ const Aluno = () => {
             console.log("ocorreu um erro", err)
         })
     }, [])
-
-    const handleClickButton = (cod) => {
-
-        navigate('/registro')
-    }
     
 
     return (
@@ -68,7 +63,6 @@ const Aluno = () => {
 
         <div className="container-button">
             <Link to={'/'}><button>Voltar</button></Link>
-            <Link to={'/registro'}><button>Alunos matriculados em cada curso </button></Link>
         </div>
 
 

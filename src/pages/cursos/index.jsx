@@ -48,6 +48,7 @@ const Cursos = () => {
 
         <div className="container-button">
             <Link to={'/'}><button>Voltar</button></Link>
+            <Link to="/create"><button>Criar Curso</button></Link>
         </div>
         </>
     )

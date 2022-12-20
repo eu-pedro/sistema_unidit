@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import api from '../../services/api.js'
 
+import './style.css'
+
 const Registro = () => {
 
     const [registeredMedicine, setRegisteredMedicine] = useState([])
@@ -10,13 +12,6 @@ const Registro = () => {
     const [value, setValue] = useState(0)
 
     
-
-
-    
-        
-    
-    
-
     useEffect(() => {
         const path = window.location.pathname
         const codCurso = path.trim().split('/')[2]
@@ -32,6 +27,8 @@ const Registro = () => {
         <div>
             
             <>
+
+            <h3>Alunos matriculados</h3>
              <table>
                 <thead>
                     <tr>
@@ -53,7 +50,7 @@ const Registro = () => {
              </table>
 
              <div className="container-button">
-                <Link to="/"><button>Voltar</button></Link>
+                <Link to="/cursos"><button>Voltar</button></Link>
              </div>
             </>
            
