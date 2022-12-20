@@ -9,19 +9,19 @@ const Registro = () => {
 
     const [value, setValue] = useState(0)
 
-    const [openTable, setOpenTable] = useState(false)
+    
 
 
-    const handleClickButton = (cod) => {
-        setValue(cod)
-        setOpenTable(true)
-    }
+    
         
     
     
 
     useEffect(() => {
-        api.get(`/aluno?cod_curso=${value}`).then((response) => setRegisteredMedicine(response.data))
+        const path = window.location.pathname
+        const codCurso = path.trim().split('/')[2]
+        console.log(codCurso)
+        api.get(`/aluno?cod_curso=${codCurso}`).then((response) => setRegisteredMedicine(response.data))
         .catch((err) => {
           console.log("ocorreu um erro", err)
         })
@@ -30,14 +30,7 @@ const Registro = () => {
 
     return(
         <div>
-            <div className="container-button">
-                <button onClick={()=> handleClickButton(1)}>Medicina</button>
-                <button onClick={()=> handleClickButton(2)}>Direito</button>
-                <button onClick={()=> handleClickButton(3)}>Administração</button>
-            </div>
-
             
-           {openTable ? (
             <>
              <table>
                 <thead>
@@ -63,8 +56,6 @@ const Registro = () => {
                 <Link to="/"><button>Voltar</button></Link>
              </div>
             </>
-           ) : null}
-
            
         </div>
     )

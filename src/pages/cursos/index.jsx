@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import api from '../../services/api.js'
 
 const Cursos = () => {
+    const navigate = useNavigate()
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
@@ -14,6 +15,9 @@ const Cursos = () => {
         
       }, [])
 
+    const handleNavigate = (codCurso) => {
+        navigate(`/registro/${codCurso}`)
+    }
 
     return (
         <>
@@ -30,14 +34,14 @@ const Cursos = () => {
 
           <tbody>
             {courses.map((course) => (
-              <>
-                <tr>
+              
+                <tr key={course.cod_curso} onClick={() => handleNavigate(course.cod_curso)}>
                   <td>{course.cod_curso}</td>         
                   <td>{course.nome}</td>       
                   <td>{course.carga_horaria}</td>       
                   <td>{course.data_cadastro}</td>       
                 </tr> 
-              </>
+              
             ))}
           </tbody>
         </table>

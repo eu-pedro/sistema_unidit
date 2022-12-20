@@ -16,10 +16,7 @@ import Registro from './pages/registros'
 
 function App() {
 
-  const stage = {
-    route: "aluno",
-    
-  }
+  
   
 
   return (
@@ -30,7 +27,7 @@ function App() {
             <Route path='/' element={<Home/>}/>
             <Route path='/alunos' element={<Aluno/>}/>
             <Route path='/cursos' element={<Curso/>}/>
-            <Route path='/registro' element={<Registro/>}/>
+            <Route path='/registro/:id' element={<Registro/>}/>
           </Routes>
         </Router>
 
