@@ -6,6 +6,8 @@ const Registro = () => {
 
     const [registeredMedicine, setRegisteredMedicine] = useState([])
 
+    
+
     useEffect(() => {
         api.get("/aluno?cod_curso=1").then((response) => setRegisteredMedicine(response.data))
         .catch((err) => {

@@ -16,6 +16,8 @@ const Home = () => {
                 
                 <Link to={'/cursos'}><button>Cursos</button></Link>
             </section>
+
+            
         </div>
     )
 }

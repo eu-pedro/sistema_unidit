@@ -1,16 +1,37 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+
+import './style.css'
 
 import api from '../../services/api.js'
 
+
+
 const Aluno = () => {
+    const navigate = useNavigate();
+
+    
+
     const [user, setUser] = useState([])
+
+
     useEffect(() => {
         api.get("/aluno").then((response) => setUser(response.data))
         .catch((err) => {
             console.log("ocorreu um erro", err)
         })
     }, [])
+
+    const handleClickButton = (cod) => {
+        const [value, setValue] = useState()
+
+        
+        
+        
+
+        navigate('/cursos')
+    }
+    
 
     return (
         <>
@@ -33,9 +54,8 @@ const Aluno = () => {
 
           <tbody>
               {user.map((users) => (
-                <>
-                  <tr>
-                      <td key={users.cod_aluno}>{users.cod_aluno}</td>
+                  <tr key={users.cod_aluno}>
+                      <td >{users.cod_aluno}</td>
                       <td>{users.nome}</td>
                       <td>{users.cpf}</td>
                       <td>{users.telefone}</td>
@@ -46,8 +66,6 @@ const Aluno = () => {
                       <td>{users.numero_casa}</td>
                       <td>{users.uf}</td>
                   </tr>
-                  
-                </>
               ))}
             
           </tbody>
@@ -56,6 +74,15 @@ const Aluno = () => {
         <div className="container-button">
             <Link to={'/'}><button>Voltar</button></Link>
         </div>
+
+
+        
+        <h3>Alunos matriculados em: </h3>
+        <section className="container-button-cursos">
+            <button onClick={()=> handleClickButton()}>Medicina</button>
+            <button>Direito</button>
+            <button>Administração</button>
+        </section>
         </>
     )
 }
