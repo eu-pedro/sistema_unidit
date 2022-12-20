@@ -5,6 +5,9 @@ import {
   Route
 } from "react-router-dom";
 
+// import context
+import { useContext } from 'react';
+
 // import components
 import Home from './pages/home'
 import Aluno from './pages/aluno/index'
@@ -12,6 +15,12 @@ import Curso from './pages/cursos'
 import Registro from './pages/registros'
 
 function App() {
+
+  const stage = {
+    route: "aluno",
+    
+  }
+  
 
   return (
     <div className="App">

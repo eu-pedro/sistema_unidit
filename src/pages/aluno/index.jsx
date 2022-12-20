@@ -23,13 +23,8 @@ const Aluno = () => {
     }, [])
 
     const handleClickButton = (cod) => {
-        const [value, setValue] = useState()
 
-        
-        
-        
-
-        navigate('/cursos')
+        navigate('/registro')
     }
     
 
@@ -73,16 +68,13 @@ const Aluno = () => {
 
         <div className="container-button">
             <Link to={'/'}><button>Voltar</button></Link>
+            <Link to={'/registro'}><button>Alunos matriculados em cada curso </button></Link>
         </div>
 
 
         
-        <h3>Alunos matriculados em: </h3>
-        <section className="container-button-cursos">
-            <button onClick={()=> handleClickButton()}>Medicina</button>
-            <button>Direito</button>
-            <button>Administração</button>
-        </section>
+        
+        
         </>
     )
 }
