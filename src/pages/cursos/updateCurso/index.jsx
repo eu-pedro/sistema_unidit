@@ -1,38 +1,67 @@
-import { useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react";
 
-import api from '../../../services/api'
+import { useLocation, useNavigate } from "react-router-dom";
+
+import api from "../../../services/api";
 
 const updateCurso = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
-    const [value, setValue] = useState([]);
+  const [value, setValue] = useState([]);
+  const [nome, setNome] = useState("");
+  const [cargaHoraria, setCargaHoraria] = useState("");
 
-    console.log(value)
-
-    
-
-    useEffect(() => {
-        const path = window.location.pathname
-        const codCurso = path.trim().split('/')[3]
-        
-
-        api.get(`/curso?cod_curso=${codCurso}`).then((response) => setValue(response.data))
-        .catch((err) => {
-          console.log("ocorreu um erro", err)
-        })
-        
-      }, [])
+  const [, , codCurso] = pathname?.split("/");
 
 
-    return (
-        <div>
-            {value.map((itens) => (
-                <>
-                <input type="text" value={itens.nome} />
-                <input type="number" value={itens.carga_horaria} />
-                </>
-            ))}
-        </div>
-    )
-}
+  
+
+
+  useEffect(() => {
+    api
+      .get(`/curso?cod_curso=${codCurso}`)
+      .then((response) => setValue(response.data))
+      .catch((err) => {
+        console.log("ocorreu um erro", err);
+      });
+  }, []);
+
+  const handleUpdate = async (e) => {
+    console.log(e);
+    e.preventDefault();
+
+    await api.put(`curso/${codCurso}`, {
+      nome: nome,
+      carga_horaria: cargaHoraria,
+    });
+
+    navigate('/cursos')
+  };
+
+  return (
+    <div>
+      <h3>Atualize o Curso</h3>
+      <form onSubmit={handleUpdate}>
+        {value.map((itens) => (
+          <Fragment key={itens.cod_curso}>
+            <input
+              type="text"
+              defaultValue={itens.nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+            <input
+              type="number"
+              defaultValue={itens.carga_horaria}
+              onChange={(e) => setCargaHoraria(e.target.value)}
+            />
+          </Fragment>
+        ))}
+
+        <button type="submit">Atualizar</button>
+      </form>
+    </div>
+  );
+};
 
 export default updateCurso;

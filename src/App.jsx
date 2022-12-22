@@ -33,7 +33,7 @@ function App() {
             <Route path='/registro/:id' element={<Registro/>}/>
             <Route path='/create/curso' element={<CreateCurso/>}/>
             <Route path='/create/aluno' element={<CreateAluno/>}/>
-            <Route path='/edit/curso/:id' element={<UpdateCurso/>}/>
+            <Route path='/curso/:id' element={<UpdateCurso/>}/>
             
           </Routes>
         </Router>

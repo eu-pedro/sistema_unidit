@@ -6,16 +6,16 @@ import api from '../../services/api.js'
 const Cursos = () => {
     const navigate = useNavigate()
     const [courses, setCourses] = useState([])
-    
 
-    
-    
+
+
+
     useEffect(() => {
         api.get("/curso").then((response) => setCourses(response.data))
         .catch((err) => {
           console.log("ocorreu um erro", err)
         })
-        
+
       }, [])
 
     const handleNavigate = (codCurso) => {
@@ -23,10 +23,19 @@ const Cursos = () => {
     }
 
     const handleEdit = (cod) => {
-      navigate(`/edit/curso/${cod}`)
+      navigate(`/curso/${cod}`)
     }
 
-    
+    const handleDelete = (cod) => {
+      if(confirm('tem certeza que você quer excluir o curso?')){
+        api.delete(`/curso/${cod}`)
+
+        alert('curso deletado')
+      }
+      window.location.reload(true);
+    }
+
+
 
 
     return (
@@ -41,22 +50,22 @@ const Cursos = () => {
               <td >Data do Cadastro</td>
               <td colSpan={2}></td>
 
-              
+
             </tr>
           </thead>
 
           <tbody>
             {courses.map((course) => (
-              
+
                 <tr key={course.cod_curso}>
-                  <td>{course.cod_curso}</td>         
-                  <td onClick={() => handleNavigate(course.cod_curso)}>{course.nome}</td>       
-                  <td>{course.carga_horaria}</td>       
-                  <td>{course.data_cadastro}</td> 
+                  <td>{course.cod_curso}</td>
+                  <td onClick={() => handleNavigate(course.cod_curso)}>{course.nome}</td>
+                  <td>{course.carga_horaria}</td>
+                  <td>{course.data_cadastro}</td>
                   <td onClick={() => handleEdit(course.cod_curso)}>editar</td>
-                  <td>deletar</td> 
-                </tr> 
-            ))} 
+                  <td onClick={() => handleDelete(course.cod_curso)}>deletar</td>
+                </tr>
+            ))}
           </tbody>
         </table>
 
@@ -67,7 +76,7 @@ const Cursos = () => {
         </>
     )
 
-    
+
 }
 
 export default Cursos;
