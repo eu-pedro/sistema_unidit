@@ -22,6 +22,10 @@ const Cursos = () => {
         navigate(`/registro/${codCurso}`)
     }
 
+    const handleEdit = (cod) => {
+      navigate(`/edit/curso/${cod}`)
+    }
+
     
 
 
@@ -34,27 +38,31 @@ const Cursos = () => {
               <td>Código do Curso</td>
               <td>Nome do Curso</td>
               <td>Carga horária</td>
-              <td>Data do Cadastro</td>
+              <td >Data do Cadastro</td>
+              <td colSpan={2}></td>
+
+              
             </tr>
           </thead>
 
           <tbody>
             {courses.map((course) => (
               
-                <tr key={course.cod_curso} onClick={() => handleNavigate(course.cod_curso)}>
+                <tr key={course.cod_curso}>
                   <td>{course.cod_curso}</td>         
-                  <td>{course.nome}</td>       
+                  <td onClick={() => handleNavigate(course.cod_curso)}>{course.nome}</td>       
                   <td>{course.carga_horaria}</td>       
-                  <td>{course.data_cadastro}</td>       
+                  <td>{course.data_cadastro}</td> 
+                  <td onClick={() => handleEdit(course.cod_curso)}>editar</td>
+                  <td>deletar</td> 
                 </tr> 
-              
-            ))}
+            ))} 
           </tbody>
         </table>
 
         <div className="container-button">
             <Link to={'/'}><button>Voltar</button></Link>
-            <Link to="/create"><button>Criar Curso</button></Link>
+            <Link to="/create/curso"><button>Criar Curso</button></Link>
         </div>
         </>
     )

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import './style.css'
 
@@ -8,9 +8,6 @@ import api from '../../services/api.js'
 
 
 const Aluno = () => {
-    const navigate = useNavigate();
-
-    
 
     const [user, setUser] = useState([])
 
@@ -63,6 +60,8 @@ const Aluno = () => {
 
         <div className="container-button">
             <Link to={'/'}><button>Voltar</button></Link>
+            <Link to={'/create/aluno'}><button>Criar novo Aluno</button></Link>
+            
         </div>
 
 
