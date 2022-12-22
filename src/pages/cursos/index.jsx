@@ -6,7 +6,10 @@ import api from '../../services/api.js'
 const Cursos = () => {
     const navigate = useNavigate()
     const [courses, setCourses] = useState([])
+    
 
+    
+    
     useEffect(() => {
         api.get("/curso").then((response) => setCourses(response.data))
         .catch((err) => {
@@ -18,6 +21,9 @@ const Cursos = () => {
     const handleNavigate = (codCurso) => {
         navigate(`/registro/${codCurso}`)
     }
+
+    
+
 
     return (
         <>
@@ -52,6 +58,8 @@ const Cursos = () => {
         </div>
         </>
     )
+
+    
 }
 
 export default Cursos;
