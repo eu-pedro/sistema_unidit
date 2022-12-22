@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 import api from "../../../services/api";
 
@@ -15,7 +15,7 @@ const updateCurso = () => {
   const [, , codCurso] = pathname?.split("/");
 
 
-  
+
 
 
   useEffect(() => {
@@ -58,7 +58,11 @@ const updateCurso = () => {
           </Fragment>
         ))}
 
-        <button type="submit">Atualizar</button>
+        <div className="container-button">
+          <Link to={'/cursos'}><button type="button">Voltar</button></Link>
+          <button type="submit">Atualizar</button>
+
+        </div>
       </form>
     </div>
   );
