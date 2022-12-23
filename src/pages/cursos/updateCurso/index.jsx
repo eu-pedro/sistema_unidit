@@ -34,12 +34,17 @@ const updateCurso = () => {
 
     e.preventDefault();
 
-    await api.put(`curso/${codCurso}`, {
-      nome: nome,
-      carga_horaria: cargaHoraria,
-    });
+     try {
+      await api.put(`curso/${codCurso}`, {
+        nome: nome,
+        carga_horaria: cargaHoraria,
+      });
 
-    navigate('/cursos')
+      alert('dados atualizados com sucesso!')
+      navigate('/cursos')
+     } catch (error) {
+      alert('houve um erro')
+     }
   };
 
   return (

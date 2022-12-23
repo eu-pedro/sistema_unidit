@@ -7,25 +7,25 @@ import './style.css'
 
 const Registro = () => {
 
-    const [registeredMedicine, setRegisteredMedicine] = useState([])
+    const [registereds, setRegistereds] = useState([])
 
     const [value, setValue] = useState(0)
 
-    
+
     useEffect(() => {
         const path = window.location.pathname
         const codCurso = path.trim().split('/')[2]
         console.log(codCurso)
-        api.get(`/aluno?cod_curso=${codCurso}`).then((response) => setRegisteredMedicine(response.data))
+        api.get(`/aluno?cod_curso=${codCurso}`).then((response) => setRegistereds(response.data))
         .catch((err) => {
           console.log("ocorreu um erro", err)
         })
-        
+
       }, [value])
 
     return(
         <div>
-            
+
             <>
 
             <h3>Alunos matriculados</h3>
@@ -39,13 +39,16 @@ const Registro = () => {
                 </thead>
 
                 <tbody>
-                    {registeredMedicine.map((registered) => (
+                {!!registereds.length ? (
+                  registereds.map((registered) => (
                     <tr key={registered.cod_aluno}>
-                        <td>{registered.cod_aluno}</td>
-                        <td>{registered.nome}</td>
-                        <td>{registered.curso_nome}</td>
+                      <td>{registered.cod_aluno}</td>
+                      <td>{registered.nome}</td>
+                      <td>{registered.curso_nome}</td>
                     </tr>
-                    ))}
+
+                    ))
+                ) : (<td colSpan={3}>Nenhum aluno matriculado neste curso</td>)}
                 </tbody>
              </table>
 
@@ -53,7 +56,7 @@ const Registro = () => {
                 <Link to="/cursos"><button>Voltar</button></Link>
              </div>
             </>
-           
+
         </div>
     )
 }
