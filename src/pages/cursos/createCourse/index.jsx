@@ -26,6 +26,9 @@ const Create = () => {
         nome: nomeCurso,
         carga_horaria: cargaHoraria
       })
+
+      console.log(nome)
+      console.log(cargaHoraria)
   
       alert("Curso criado com sucesso!!")
   

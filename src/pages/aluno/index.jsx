@@ -36,6 +36,7 @@ const Aluno = () => {
               <td>Bairro</td>
               <td>Número da Casa</td>
               <td>UF</td>
+              <td colSpan={2}></td>
             </tr>
           </thead>
 
@@ -52,6 +53,8 @@ const Aluno = () => {
                       <td>{users.bairro}</td>
                       <td>{users.numero_casa}</td>
                       <td>{users.uf}</td>
+                      <td>editar</td>
+                      <td>editar</td>
                   </tr>
               ))}
             
