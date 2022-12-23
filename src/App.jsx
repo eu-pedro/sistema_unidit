@@ -15,6 +15,7 @@ import Registro from './pages/registros'
 import CreateCurso from './pages/cursos/createCourse';
 import CreateAluno from './pages/aluno/createAluno'
 import UpdateCurso from './pages/cursos/updateCurso';
+import UpdateAluno from './pages/aluno/updateAluno'
 
 function App() {
 
@@ -29,11 +30,16 @@ function App() {
 
             <Route path='/' element={<Home/>}/>
             <Route path='/alunos' element={<Aluno/>}/>
-            <Route path='/cursos' element={<Curso/>}/>
-            <Route path='/registro/:id' element={<Registro/>}/>
-            <Route path='/create/curso' element={<CreateCurso/>}/>
             <Route path='/create/aluno' element={<CreateAluno/>}/>
+            <Route path='/aluno/:id' element={<UpdateAluno/>}/>
+            
+
+            <Route path='/cursos' element={<Curso/>}/>
+            <Route path='/create/curso' element={<CreateCurso/>}/>
             <Route path='/curso/:id' element={<UpdateCurso/>}/>
+
+
+            <Route path='/registro/:id' element={<Registro/>}/>
             
           </Routes>
         </Router>

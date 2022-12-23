@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import './style.css'
 
@@ -8,6 +8,8 @@ import api from '../../services/api.js'
 
 
 const Aluno = () => {
+
+    const navigate = useNavigate()
 
     const [user, setUser] = useState([])
 
@@ -18,6 +20,10 @@ const Aluno = () => {
             console.log("ocorreu um erro", err)
         })
     }, [])
+
+    const handleEdit = (cod) => {
+        navigate(`/aluno/${cod}`)
+    }
     
 
     return (
@@ -53,7 +59,7 @@ const Aluno = () => {
                       <td>{users.bairro}</td>
                       <td>{users.numero_casa}</td>
                       <td>{users.uf}</td>
-                      <td>editar</td>
+                      <td onClick={()=> handleEdit(users.cod_aluno)}>editar</td>
                       <td>editar</td>
                   </tr>
               ))}

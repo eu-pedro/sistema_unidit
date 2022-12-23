@@ -28,7 +28,7 @@ const updateCurso = () => {
   }, []);
 
   const handleUpdate = async (e) => {
-    console.log(e);
+    
     e.preventDefault();
 
     await api.put(`curso/${codCurso}`, {
