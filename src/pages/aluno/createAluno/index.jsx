@@ -1,7 +1,12 @@
 import { useState } from "react";
 import api from "../../../services/api";
 
+import { Link, useNavigate } from "react-router-dom";
+
 const CreateAluno = () => {
+
+  const navigate = useNavigate();
+
   const [options, setOptions] = useState([]);
 
   const [nome, setNome] = useState("");
@@ -16,6 +21,8 @@ const CreateAluno = () => {
   const [uf, setUf] = useState("");
 
   api.get("/curso").then((response) => setOptions(response.data));
+
+
 
   const postData = async (e) => {
     e.preventDefault();
@@ -35,6 +42,7 @@ const CreateAluno = () => {
       });
 
       alert("dados cadastrados com sucesso!");
+      navigate('/alunos')
     } catch (error) {
       alert("houve um erro");
     }
@@ -50,6 +58,8 @@ const CreateAluno = () => {
     setNumeroCasa("");
     setUf("");
   };
+
+
 
   return (
     <div>
@@ -144,7 +154,10 @@ const CreateAluno = () => {
           required
         />
 
-        <button type="submit">Cadastrar</button>
+        <div className="container-button">
+          <Link to={'/alunos'}><button>Voltar</button></Link>
+          <button type="submit">Cadastrar</button>
+        </div>
       </form>
     </div>
   );

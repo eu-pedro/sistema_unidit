@@ -24,7 +24,14 @@ const Aluno = () => {
     const handleEdit = (cod) => {
         navigate(`/aluno/${cod}`)
     }
-    
+
+    const handleDelete = (codAluno) => {
+      if(confirm('tem certeza que você quer excluir o curso?')){
+         api.delete(`/aluno/${codAluno}`)
+         alert('dados deletados com sucesso!')
+      }
+      window.location.reload(true);
+    }
 
     return (
         <>
@@ -60,23 +67,23 @@ const Aluno = () => {
                       <td>{users.numero_casa}</td>
                       <td>{users.uf}</td>
                       <td onClick={()=> handleEdit(users.cod_aluno)}>editar</td>
-                      <td>editar</td>
+                      <td onClick={() => handleDelete(users.cod_aluno)}>deletar</td>
                   </tr>
               ))}
-            
+
           </tbody>
         </table>
 
         <div className="container-button">
             <Link to={'/'}><button>Voltar</button></Link>
             <Link to={'/create/aluno'}><button>Criar novo Aluno</button></Link>
-            
+
         </div>
 
 
-        
-        
-        
+
+
+
         </>
     )
 }

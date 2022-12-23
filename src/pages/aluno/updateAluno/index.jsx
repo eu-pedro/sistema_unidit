@@ -1,14 +1,17 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import api from "../../../services/api";
 
 const updateAluno = () => {
+  const navigate = useNavigate()
+
   const { pathname } = useLocation();
   const [, , codAluno] = pathname?.split("/");
 
   const [values, setValues] = useState([]);
   const [options, setOptions] = useState([]);
+
 
   const [nome, setNome] = useState("");
   const [codCurso, setCodCurso] = useState("");
@@ -23,16 +26,40 @@ const updateAluno = () => {
 
   useEffect(()=>{
     api.get("/curso").then((response) => setOptions(response.data));
+
   }, [])
 
   useEffect(() => {
     api
     .get(`/aluno?cod_aluno=${codAluno}`)
-    .then((response) => setValues(response?.data));
+    .then((response) => {response.data.map((campo) => (
+      setNome(campo.nome),
+      setEmail(campo.email),
+      setCodCurso(campo.cod_curso),
+      setCpf(campo.cpf),
+      setCep(campo.cep),
+      setTelefone(campo.telefone),
+      setBairro(campo.bairro),
+      setNumeroCasa(campo.numero_casa),
+      setUf(campo.uf),
+      setRua(campo.rua)
+    ))});
+
+
+
+
   }, [])
 
+
+
+
   const handleUpdate = async (e) => {
+
+
+
     e.preventDefault();
+
+
     try {
       await api.put(`aluno/${codAluno}`, {
         cod_curso: codCurso,
@@ -51,7 +78,7 @@ const updateAluno = () => {
 
       navigate('/alunos')
     } catch (error) {
-        alert("houve um erro")
+        console.log(error)
     }
   };
 
@@ -59,8 +86,7 @@ const updateAluno = () => {
     <div>
       <h3>Atualize o Curso</h3>
       <form onSubmit={handleUpdate}>
-        {values.map((value) => (
-          <Fragment key={value.cod_aluno}>
+
             <label htmlFor="nome">Nome: </label>
             <input
               type="text"
@@ -68,17 +94,17 @@ const updateAluno = () => {
               name="nome"
               onChange={(e) => setNome(e.target.value)}
               required
-              defaultValue={value.nome}
+              defaultValue={nome}
             />
             <select
-              defaultValue={value.cod_curso}
+              defaultValue={codCurso}
               onChange={(e) => setCodCurso(e.target.value)}
               name="cod_curso"
               id="cod_curso"
               required
             >
-              <option value={value.cod_curso} disabled>
-                {value.cod_curso}
+              <option value={codCurso} disabled>
+                {codCurso}
               </option>
 
               {options.map((option) => (
@@ -95,7 +121,7 @@ const updateAluno = () => {
               onChange={(e) => setCpf(e.target.value)}
               maxLength={11}
               required
-              defaultValue={value.cpf}
+              defaultValue={cpf}
             />
             <label htmlFor="telefone">Telefone:</label>
             <input
@@ -105,7 +131,7 @@ const updateAluno = () => {
               onChange={(e) => setTelefone(e.target.value)}
               maxLength={11}
               required
-              defaultValue={value.telefone}
+              defaultValue={telefone}
             />
             <label htmlFor="email">E-mail</label>
             <input
@@ -114,7 +140,7 @@ const updateAluno = () => {
               id="email"
               onChange={(e) => setEmail(e.target.value)}
               required
-              defaultValue={value.email}
+              defaultValue={email}
             />
             <label htmlFor="cep">CEP</label>
             <input
@@ -123,7 +149,7 @@ const updateAluno = () => {
               id="cep"
               onChange={(e) => setCep(e.target.value)}
               required
-              defaultValue={value.cep}
+              defaultValue={cep}
             />
             <label htmlFor="rua">Rua</label>
             <input
@@ -132,7 +158,7 @@ const updateAluno = () => {
               id="rua"
               onChange={(e) => setRua(e.target.value)}
               required
-              defaultValue={value.rua}
+              defaultValue={rua}
             />
             <label htmlFor="bairro">Bairro</label>
             <input
@@ -141,7 +167,7 @@ const updateAluno = () => {
               id="bairro"
               onChange={(e) => setBairro(e.target.value)}
               required
-              defaultValue={value.bairro}
+              defaultValue={bairro}
             />
             <label htmlFor="numero_casa">Número da Casa</label>
             <input
@@ -150,7 +176,7 @@ const updateAluno = () => {
               id="numero_casa"
               onChange={(e) => setNumeroCasa(e.target.value)}
               required
-              defaultValue={value.numero_casa}
+              defaultValue={numeroCasa}
             />
             <label htmlFor="uf">UF</label>
             <input
@@ -159,10 +185,10 @@ const updateAluno = () => {
               id="uf"
               onChange={(e) => setUf(e.target.value)}
               required
-              defaultValue={value.uf}
+              defaultValue={uf}
             />
-          </Fragment>
-        ))}
+
+
 
         <div className="container-button">
           <Link to={"/alunos"}>

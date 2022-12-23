@@ -21,14 +21,17 @@ const updateCurso = () => {
   useEffect(() => {
     api
       .get(`/curso?cod_curso=${codCurso}`)
-      .then((response) => setValue(response.data))
+      .then((response) => response.data.map((campo) => (
+        setNome(campo.nome),
+        setCargaHoraria(campo.carga_horaria)
+      )))
       .catch((err) => {
         console.log("ocorreu um erro", err);
       });
   }, []);
 
   const handleUpdate = async (e) => {
-    
+
     e.preventDefault();
 
     await api.put(`curso/${codCurso}`, {
@@ -43,20 +46,19 @@ const updateCurso = () => {
     <div>
       <h3>Atualize o Curso</h3>
       <form onSubmit={handleUpdate}>
-        {value.map((itens) => (
-          <Fragment key={itens.cod_curso}>
+
             <input
               type="text"
-              defaultValue={itens.nome}
+              defaultValue={nome}
               onChange={(e) => setNome(e.target.value)}
             />
             <input
               type="number"
-              defaultValue={itens.carga_horaria}
+              defaultValue={cargaHoraria}
               onChange={(e) => setCargaHoraria(e.target.value)}
             />
-          </Fragment>
-        ))}
+
+
 
         <div className="container-button">
           <Link to={'/cursos'}><button type="button">Voltar</button></Link>
