@@ -1,3 +1,31 @@
-h3{
+h3 {
   padding: 20px;
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgb(0, 47, 255);
+  border-top-color: rgba(0, 94, 255, 0.3);
+  border-radius: 50%;
+  animation: rotate ease-in-out 1s infinite;
+  margin: -50px auto 0;
+ 
+  
+
+  position: absolute;
+  top: 110px;
+  left: 0;
+  right: 0;
+}
+
+
+.container-table {
+  position: relative;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
 }
