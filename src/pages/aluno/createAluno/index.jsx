@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../../services/api";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,11 @@ const CreateAluno = () => {
   const navigate = useNavigate();
 
   const [options, setOptions] = useState([]);
+
+  const [num, setNum] = useState("");
+  const [tel, setTel] = useState("")
+  const [validateCep, setValidateCep] = useState('');
+
 
   const [nome, setNome] = useState("");
   const [codCurso, setCodCurso] = useState("");
@@ -20,7 +25,9 @@ const CreateAluno = () => {
   const [numeroCasa, setNumeroCasa] = useState("");
   const [uf, setUf] = useState("");
 
-  api.get("/curso").then((response) => setOptions(response.data));
+  useEffect(()=> {
+    api.get("/curso").then((response) => setOptions(response.data));
+  }, [])
 
 
 
@@ -59,7 +66,23 @@ const CreateAluno = () => {
     setUf("");
   };
 
+  const handleChangeCpf = e => {
+    setCpf(num)
+    const limitCPF = 11;
+    setNum(e.target.value.slice(0, limitCPF));
+  }
 
+  const handleChangeTel = e => {
+    setTelefone(tel)
+    const limitTel = 11;
+    setTel(e.target.value.slice(0, limitTel))
+  }
+
+  const handleChangeCep = e => {
+    setCep(validateCep)
+    const limitCep = 8;
+    setValidateCep(e.target.value.slice(0, limitCep))
+  }
 
   return (
     <div>
@@ -92,8 +115,8 @@ const CreateAluno = () => {
           type="number"
           name="cpf"
           id="cpf"
-          onChange={(e) => setCpf(e.target.value)}
-          maxLength={11}
+          onChange={handleChangeCpf}
+          value={num}
           required
         />
         <label htmlFor="telefone">Telefone:</label>
@@ -101,8 +124,8 @@ const CreateAluno = () => {
           type="number"
           name="telefone"
           id="telefone"
-          onChange={(e) => setTelefone(e.target.value)}
-          maxLength={11}
+          onChange={handleChangeTel}
+          value={tel}
           required
         />
         <label htmlFor="email">E-mail</label>
@@ -118,7 +141,8 @@ const CreateAluno = () => {
           type="number"
           name="cep"
           id="cep"
-          onChange={(e) => setCep(e.target.value)}
+          value={validateCep}
+          onChange={handleChangeCep}
           required
         />
         <label htmlFor="rua">Rua</label>

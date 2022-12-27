@@ -27,7 +27,7 @@ const Registro = () => {
       
       setIsLoader(false)
       setMessage("Nenhum aluno matriculado neste curso")
-    }, 500);
+    }, 1500);
 
     return () => clearTimeout(timer);
   });
